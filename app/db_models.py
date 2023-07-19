@@ -17,7 +17,8 @@ class Message(Base):
     @property
     def response(self):
         try:
-            response = MessageResponse.from_orm(self)
+            message = MessageResponse.from_orm(self)  # TODO: replace deprecated method
+            response = PayloadResponse(payload=message)
         except Exception as error:
             logging.error(error)
             response = PayloadResponse(status_code=status.HTTP_404_NOT_FOUND, error="Message not found")
