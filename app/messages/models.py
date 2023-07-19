@@ -2,7 +2,7 @@ from pydantic_settings import BaseSettings
 
 
 class CreateMessageRequest(BaseSettings):
-    test: str
+    text: str
 
 
 class MessageResponse(CreateMessageRequest):
