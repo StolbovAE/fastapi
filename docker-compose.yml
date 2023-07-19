@@ -2,7 +2,7 @@ version: '3'
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:6.2.1
-    container_name: my-zookeeper-container
+    container_name: zookeeper
     ports:
       - "2181:2181"
     environment:
@@ -10,7 +10,7 @@ services:
 
   kafka:
     image: confluentinc/cp-kafka:6.2.1
-    container_name: my-kafka-container
+    container_name: kafka
     depends_on:
       - zookeeper
     ports:
@@ -27,6 +27,5 @@ services:
       - "5005:5005"
     volumes:
       - ./:/app
-      - type: bind
     command: uvicorn app:app --host 0.0.0.0 --port 5005 --workers 3 --reload
 

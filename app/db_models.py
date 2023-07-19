@@ -1,6 +1,7 @@
 import logging
-from fastapi import status
 
+from fastapi import status
+from fastapi import HTTPException
 from sqlalchemy import Column, Integer, String
 
 from app.base import Base
@@ -17,10 +18,12 @@ class Message(Base):
     @property
     def response(self):
         try:
-            response = MessageResponse.from_orm(self)
+            message = MessageResponse.model_validate(self)
+            logging.debug(f"Model from ORM: {message}")
+            response = PayloadResponse(payload=message)
         except Exception as error:
             logging.error(error)
-            response = PayloadResponse(status_code=status.HTTP_404_NOT_FOUND, error="Message not found")
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Message not found")
         return response
 
     def __repr__(self):
