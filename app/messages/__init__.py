@@ -20,7 +20,7 @@ async def send_message(message: str):
 
 @messages.on_event("startup")
 async def startup_event():
-    async with broker_consumer as consumer:
+    async with broker_consumer() as consumer:
         async for msg in consumer:
             received_message = msg.value.decode()
             logging.debug(f"Got message from broker: {received_message}")
