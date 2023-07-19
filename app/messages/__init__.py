@@ -25,7 +25,7 @@ async def startup_event():
             received_message = msg.value.decode()
             logging.debug(f"Got message from broker: {received_message}")
 
-            message_data = CreateMessageRequest(**received_message)
+            message_data = CreateMessageRequest(text=received_message)
 
             response = MessageDbTable.create(message_data)
             logging.debug(f"Got response: {response}")
