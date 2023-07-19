@@ -10,3 +10,4 @@ class MessageResponse(CreateMessageRequest):
 
     class Config:
         orm_mode = True
+        from_attributes = True
