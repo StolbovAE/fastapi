@@ -1,0 +1,11 @@
+/venv
+/.idea
+migrations/*
+!migrations/versions/
+**/__pycache__
+*test*
+*log
+alembic.ini
+*.env
+*.log
+*.pyc
